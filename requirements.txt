@@ -1,0 +1,25 @@
+# PyTorch with CUDA 12.4 (Python 3.13)
+# Install with: pip install -r requirements.txt
+# Or install PyTorch separately first:
+# pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu124
+
+torch==2.6.0
+torchvision==0.21.0
+torchaudio==2.6.0
+
+# Core scientific computing
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Machine learning
+scikit-learn>=1.2.0
+
+# Data processing
+Pillow>=9.0.0
+
+# Progress bars
+tqdm>=4.60.0
+
+# Configuration and logging
+pyyaml>=6.0
+tensorboard>=2.10.0
