@@ -152,6 +152,8 @@ def run_one_experiment(exp_id: int, exp: dict, global_log_dir: Path) -> dict:
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
                 text=True,
+                encoding="utf-8",
+                errors="replace",
                 bufsize=1,
             )
             # 实时输出并写入文件

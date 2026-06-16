@@ -1,4 +1,4 @@
-﻿"""Federated Learning dataset builder.
+"""Federated Learning dataset builder.
 
 Builds per-client DataLoaders from a torchvision dataset with Non-IID partitioning.
 """
