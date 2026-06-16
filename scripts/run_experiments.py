@@ -156,11 +156,23 @@ def run_one_experiment(exp_id: int, exp: dict, global_log_dir: Path) -> dict:
                 errors="replace",
                 bufsize=1,
             )
-            # 实时输出并写入文件
+            # 实时输出并写入文件（进度条单行刷新）
+            is_progress = False
             for line in proc.stdout:
-                print(line, end="")
                 log_file.write(line)
                 log_file.flush()
+                # 检测 tqdm 进度条（含 | 和 %）
+                if "|" in line and "%" in line and ("\r" in line or line.strip().endswith("]")):
+                    clean = line.replace("\r", "").replace("\n", "")
+                    print(f"\r{clean}", end="", flush=True)
+                    is_progress = True
+                else:
+                    if is_progress:
+                        print()  # 进度条结束后换行
+                        is_progress = False
+                    print(line, end="", flush=True)
+            if is_progress:
+                print()
 
             proc.wait()
             elapsed = round(time.time() - start_time, 1)
