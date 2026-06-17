@@ -27,9 +27,9 @@ def get_args() -> argparse.Namespace:
                         help="Base width multiplier for ResNet")
 
     # ---- Federated Learning ----
-    parser.add_argument("--num_clients", type=int, default=1)
+    parser.add_argument("--num_clients", type=int, default=10)
     parser.add_argument("--global_rounds", type=int, default=10)
-    parser.add_argument("--local_epochs", type=int, default=1)
+    parser.add_argument("--local_epochs", type=int, default=5)
     parser.add_argument("--join_ratio", type=float, default=1.0,
                         help="Fraction of clients per round")
     parser.add_argument("--partition", type=str, default="dirichlet",
