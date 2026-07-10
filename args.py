@@ -20,9 +20,9 @@ def get_args() -> argparse.Namespace:
     parser.add_argument("--seed", type=int, default=42)
 
     # ---- Dataset ----
-    parser.add_argument("--dataset", type=str, default="cifar10",
+    parser.add_argument("--dataset", type=str, default="cifar100",
                         choices=["cifar10", "cifar100"])
-    parser.add_argument("--num_classes", type=int, default=10)
+    parser.add_argument("--num_classes", type=int, default=100)
     parser.add_argument("--data_root", type=str, default="./data")
 
     # ---- Model ----
@@ -32,7 +32,7 @@ def get_args() -> argparse.Namespace:
                         help="Base width multiplier for ResNet")
 
     # ---- Federated Learning ----
-    parser.add_argument("--num_clients", type=int, default=20)
+    parser.add_argument("--num_clients", type=int, default=10)
     parser.add_argument("--global_rounds", type=int, default=170)
     parser.add_argument("--local_epochs", type=int, default=5)
     parser.add_argument("--join_ratio", type=float, default=1.0,
@@ -52,17 +52,17 @@ def get_args() -> argparse.Namespace:
     # ---- Stage 0: GPM Memory ----
     parser.add_argument("--memory_layers", type=str, default="layer4",
                         help="Comma-separated layer names for memory extraction")
-    parser.add_argument("--memory_var_th", type=float, default=0.97,
+    parser.add_argument("--memory_var_th", type=float, default=0.95,
                         help="SVD variance threshold for memory basis")
     parser.add_argument("--memory_max_rank", type=int, default=512,
                         help="Max rank for memory basis")
-    parser.add_argument("--memory_max_batches", type=int, default=20,
+    parser.add_argument("--memory_max_batches", type=int, default=8,
                         help="Max batches for activation collection")
 
     # ---- Stage 1-2: Drift Probe ----
     parser.add_argument("--toxic_layer", type=str, default="layer4",
                         help="Layer to apply toxic forward projection")
-    parser.add_argument("--drift_var_th", type=float, default=0.98,
+    parser.add_argument("--drift_var_th", type=float, default=0.90,
                         help="SVD variance threshold for drift subspace")
     parser.add_argument("--drift_max_rank", type=int, default=32,
                         help="Max rank for drift subspace")

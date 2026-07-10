@@ -25,7 +25,8 @@ EXPERIMENTS = [
     {
         "params": {
 
-            "global_rounds": 100,
+            "global_rounds": 50,
+            "memory_max_batches":2
 
         },
     },
@@ -34,10 +35,8 @@ EXPERIMENTS = [
     {
         "params": {
 
-            "global_rounds": 30,
-            "drift_var_th":0.95,
-            "memory_var_th":0.95,
-            "local_lr":0.005
+            "global_rounds": 50,
+            "memory_max_batches":4
         },
     },
 
@@ -46,9 +45,7 @@ EXPERIMENTS = [
         "params": {
 
             "global_rounds": 50,
-            "drift_var_th":0.95,
-            "memory_var_th":0.95,
-            "local_lr":0.005
+            "memory_max_batches":8
 
         },
     },
@@ -56,10 +53,16 @@ EXPERIMENTS = [
     # ---- 实验 3 ----
     {
         "params": {
-            "global_rounds": 100,
-            "drift_var_th": 0.95,
-            "memory_var_th": 0.95,
-            "local_lr": 0.005
+            "global_rounds": 50,
+            "memory_max_batches":12
         },
     },
+    # ---- 实验 4 ----
+    {
+        "params": {
+            "global_rounds": 50,
+            "memory_max_batches": 16
+        },
+    },
+
 ]

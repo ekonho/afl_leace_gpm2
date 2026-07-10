@@ -118,7 +118,7 @@ class DualOrthoPipeline:
             )
 
         logger.info("Stage 1: Computing local closed-form weight via AFL...")
-        W_local = self._compute_local_weight(client_loader)
+        W_local = self._compute_local_weight(client_loader, max_batches=memory_max_batches)
 
         logger.info("Stage 2: Detecting drift and building toxic projector...")
         self.drift = self.probe.detect_drift(W_local, global_head_weight)
@@ -162,7 +162,7 @@ class DualOrthoPipeline:
         if self.trainer is not None:
             self.trainer.remove_hooks()
 
-    def _compute_local_weight(self, dataloader) -> Tensor:
+    def _compute_local_weight(self, dataloader, max_batches: int = 20) -> Tensor:
         """Compute local closed-form weight using AFL analytic solution."""
         self.model.eval()
         features_list = []
@@ -185,7 +185,7 @@ class DualOrthoPipeline:
                 ).float()
                 labels_list.append(one_hot)
 
-                if i >= 19:
+                if i + 1 >= max_batches:
                     break
 
         X = torch.cat(features_list, dim=0)
