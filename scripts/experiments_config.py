@@ -21,12 +21,11 @@
 
 EXPERIMENTS = [
 
-    # ---- 实验 0: CIFAR-10, alpha=0.5 (moderate non-IID) ----
+    # ---- 实验 0 ----
     {
         "params": {
-            "dataset": "cifar100",
-            "global_rounds": 1,
-            "local_lr": 0.01,
+
+            "global_rounds": 100,
 
         },
     },
@@ -34,19 +33,22 @@ EXPERIMENTS = [
     # ---- 实验 1 ----
     {
         "params": {
-            "dataset": "cifar10",
-            "global_rounds": 1,
-            "local_lr": 0.01,
 
+            "global_rounds": 30,
+            "drift_var_th":0.95,
+            "memory_var_th":0.95,
+            "local_lr":0.005
         },
     },
 
     # ---- 实验 2 ----
     {
         "params": {
-            "dataset": "cifar100",
-            "global_rounds": 1,
-            "local_lr": 0.01,
+
+            "global_rounds": 50,
+            "drift_var_th":0.95,
+            "memory_var_th":0.95,
+            "local_lr":0.005
 
         },
     },
@@ -54,8 +56,10 @@ EXPERIMENTS = [
     # ---- 实验 3 ----
     {
         "params": {
-            "global_rounds": 1,
-            "local_lr": 0.01,
+            "global_rounds": 100,
+            "drift_var_th": 0.95,
+            "memory_var_th": 0.95,
+            "local_lr": 0.005
         },
     },
 ]
