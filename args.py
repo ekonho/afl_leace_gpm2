@@ -32,9 +32,9 @@ def get_args() -> argparse.Namespace:
                         help="Base width multiplier for ResNet")
 
     # ---- Federated Learning ----
-    parser.add_argument("--num_clients", type=int, default=1)
-    parser.add_argument("--global_rounds", type=int, default=1)
-    parser.add_argument("--local_epochs", type=int, default=1)
+    parser.add_argument("--num_clients", type=int, default=20)
+    parser.add_argument("--global_rounds", type=int, default=170)
+    parser.add_argument("--local_epochs", type=int, default=5)
     parser.add_argument("--join_ratio", type=float, default=1.0,
                         help="Fraction of clients per round")
     parser.add_argument("--partition", type=str, default="dirichlet",
@@ -44,7 +44,7 @@ def get_args() -> argparse.Namespace:
     parser.add_argument("--batch_size", type=int, default=64)
 
     # ---- Training ----
-    parser.add_argument("--local_lr", type=float, default=0.01)
+    parser.add_argument("--local_lr", type=float, default=0.005)
     parser.add_argument("--local_momentum", type=float, default=0.9)
     parser.add_argument("--local_weight_decay", type=float, default=1e-4)
     parser.add_argument("--grad_clip", type=float, default=5.0)
@@ -62,7 +62,7 @@ def get_args() -> argparse.Namespace:
     # ---- Stage 1-2: Drift Probe ----
     parser.add_argument("--toxic_layer", type=str, default="layer4",
                         help="Layer to apply toxic forward projection")
-    parser.add_argument("--drift_var_th", type=float, default=0.9,
+    parser.add_argument("--drift_var_th", type=float, default=0.98,
                         help="SVD variance threshold for drift subspace")
     parser.add_argument("--drift_max_rank", type=int, default=32,
                         help="Max rank for drift subspace")
