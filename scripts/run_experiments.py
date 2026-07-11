@@ -47,8 +47,8 @@ def load_experiments():
     return EXPERIMENTS
 
 
-def build_command(exp: dict) -> list[str]:
-    """构建 python main.py 命令，不覆盖 log_dir/save_dir。"""
+def build_command(exp: dict, batch_log_dir: Path) -> list[str]:
+    """?? python main.py ???????? batch ????"""
     cmd = [sys.executable, str(PROJECT_ROOT / "main.py")]
     for key, value in exp.get("params", {}).items():
         flag = f"--{key}"
@@ -57,6 +57,9 @@ def build_command(exp: dict) -> list[str]:
                 cmd.append(flag)
         else:
             cmd.extend([flag, str(value)])
+    # Override log/save dirs to scripts/logs/<batch_name>
+    cmd.extend(["--log_dir", str(batch_log_dir)])
+    cmd.extend(["--save_dir", str(batch_log_dir / "checkpoints")])
     return cmd
 
 
@@ -96,11 +99,18 @@ def main():
         print("\n[DRY RUN] No experiments executed.")
         return
 
+    # Create batch output directory under scripts/logs/
+    script_dir = Path(__file__).resolve().parent
+    batch_name = f"batch_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    batch_log_dir = script_dir / "logs" / batch_name
+    batch_log_dir.mkdir(parents=True, exist_ok=True)
+    print(f"\n  Batch log dir: {batch_log_dir}")
+
     batch_start = time.time()
     results = []
 
     for exp_id, exp in experiments:
-        cmd = build_command(exp)
+        cmd = build_command(exp, batch_log_dir)
         cmd_str = " ".join(cmd)
 
         print(f"\n{'#' * 70}")
@@ -146,8 +156,7 @@ def main():
     print("=" * 70)
 
     # 保存汇总到 logs/
-    summary_path = PROJECT_ROOT / "logs" / f"summary_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-    summary_path.parent.mkdir(parents=True, exist_ok=True)
+    summary_path = batch_log_dir / "summary.json"
     with open(summary_path, "w", encoding="utf-8") as f:
         json.dump({"total_elapsed_sec": batch_elapsed, "results": results}, f, indent=2)
     print(f"\n汇总已保存: {summary_path}")

@@ -26,7 +26,7 @@ EXPERIMENTS = [
         "params": {
 
             "global_rounds": 50,
-            "memory_max_batches":2
+            "memory_max_batches":6
 
         },
     },
@@ -36,33 +36,33 @@ EXPERIMENTS = [
         "params": {
 
             "global_rounds": 50,
-            "memory_max_batches":4
+            "memory_max_batches":10
         },
     },
 
-    # ---- 实验 2 ----
-    {
-        "params": {
-
-            "global_rounds": 50,
-            "memory_max_batches":8
-
-        },
-    },
-
-    # ---- 实验 3 ----
-    {
-        "params": {
-            "global_rounds": 50,
-            "memory_max_batches":12
-        },
-    },
-    # ---- 实验 4 ----
-    {
-        "params": {
-            "global_rounds": 50,
-            "memory_max_batches": 16
-        },
-    },
+    # # ---- 实验 2 ----
+    # {
+    #     "params": {
+    #
+    #         "global_rounds": 80,
+    #         "memory_max_batches":8
+    #
+    #     },
+    # },
+    #
+    # # ---- 实验 3 ----
+    # {
+    #     "params": {
+    #         "global_rounds": 100,
+    #         "memory_max_batches":8
+    #     },
+    # },
+    # # ---- 实验 4 ----
+    # {
+    #     "params": {
+    #         "global_rounds": 150,
+    #         "memory_max_batches": 8
+    #     },
+    # },
 
 ]

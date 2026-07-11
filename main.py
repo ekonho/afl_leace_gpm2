@@ -88,6 +88,13 @@ def main():
     device = torch.device(args.device)
     set_seed(args.seed)
 
+    # Use paths relative to main.py's location (unless user explicitly set them)
+    _main_dir = os.path.dirname(os.path.abspath(__file__))
+    if args.log_dir == "./logs":
+        args.log_dir = os.path.join(_main_dir, "logs")
+    if args.save_dir == "./checkpoints":
+        args.save_dir = os.path.join(_main_dir, "checkpoints")
+
     # Logging
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_name = f"{args.dataset}_{args.model}_{args.partition}_a{args.alpha}_{timestamp}"
